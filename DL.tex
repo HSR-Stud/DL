@@ -1,0 +1,92 @@
+% !TeX spellcheck = en_US
+\PassOptionsToPackage{table}{xcolor}
+\documentclass{scrartcl}
+\usepackage{etex}
+\include{header/zusammenfassung}
+\include{header/hyperref}
+\include{header/listings}
+\include{header/math_commands}
+\usepackage{tikz}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{bm}
+%\usepackage{bbding}
+\usepackage{setspace} 
+\usepackage{tabularx}
+\usepackage{fixmath}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{intersections}
+\usetikzlibrary{decorations.markings}
+
+
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\buchSeite}[1]{{\color{red} \small (p.#1)}}
+\newcommand{\dingfamily}{\fontencoding{U}\fontfamily{ding}\selectfont}
+\newcommand{\chooseSymbol}[1]{{\dingfamily\symbol{#1}}}
+\newcommand{\FiveStarOpen}{\chooseSymbol{'071}}
+
+\newcommand{\bol}[1]{\ensuremath{\mathbold{#1}}}
+\newcommand{\bolv}{\ensuremath{\mathbold{v}}}
+\newcommand{\bolA}{\ensuremath{\mathbold{A}}}
+\newcommand{\bolt}{\ensuremath{\mathbold{\theta}}}
+\newcommand{\diag}{\ensuremath{\text{diag}}}
+\newcommand{\Exp}{\ensuremath{\mathbb{E}}}
+\newcommand{\var}{\ensuremath{\text{Var}}}
+\newcommand{\cov}{\ensuremath{\text{Cov}}}
+\newcommand{\half}{\ensuremath{\frac{1}{2}}}
+\newcommand{\mysum}{\sum_{i=1}^{n}}
+\newcommand{\ts}{\textsuperscript}
+
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+
+\tikzstyle{3x3mask}=[
+	matrix of nodes, 
+	nodes={draw, minimum size=8mm, anchor=center},
+	column sep=0mm
+]
+
+
+% Spaltenabstand bei multicols
+\setlength{\columnsep}{1.5em}
+
+\title{Deep Learning}
+\author{Simon Kassian Locher, Max Schwendeler}
+
+\begin{document}
+\selectlanguage{english}
+
+\lstset{language=Python}
+\lstset{style=Python}
+
+\begin{titlepage}
+	{\scshape \maketitle}
+%	\vfill
+%	\hspace{5cm}
+	\centering
+	\begin{minipage}{18cm}
+		\centering
+		\includegraphics[width=0.95\linewidth]{header/cnn.png}
+	\end{minipage}
+\end{titlepage}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+\newpage
+
+\input{sections/LinAlg}
+\input{sections/ProbInf}
+\input{sections/NumComp}
+\input{sections/MLbase}
+\input{sections/DeepFFN}
+\input{sections/Regularization}
+\input{sections/Optimization}
+\input{sections/CNN}
+\input{sections/Recurrent}
+\input{sections/Practical}
+\input{sections/StatML}
+
+\end{document}

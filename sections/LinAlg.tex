@@ -1,0 +1,349 @@
+\section{Linear Algebra}
+
+\begin{multicols}{2}
+	\subsection{Basic building blocks}
+	\textbf{Column} vector ($n\times 1$):
+	\[ \bol{x} = \begin{bmatrix} x_1\\x_2\\\vdots\\x_n \end{bmatrix}  \]
+	
+	\textbf{Row} vector ($1\times n$):
+	\[ \bol{x} = \begin{bmatrix} x_1&x_2&\cdots&x_n \end{bmatrix}  \]
+	
+	Matrix ($3\times 2$):
+	\[ \bol{A} = 
+	\begin{bmatrix} 
+		A_{1,1} & A_{1,2} \\
+		A_{2,1} & A_{2,2} \\
+		A_{3,1} & A_{3,2}		
+	\end{bmatrix}  \]
+	
+	\subsection{Basic operations}
+	\textbf{Transposed} matrix:
+	\[ \bol{A}^T = 
+	\begin{bmatrix} 
+	A_{1,1} & A_{2,1} & A_{3,1} \\
+	A_{1,2} & A_{2,2} & A_{3,2}
+	\end{bmatrix}  \]
+	
+	Adding a vector to a matrix (\textbf{Broadcasting}):
+	\[ \bol{C} = \bol{A} + \bol{b}, \text{ where } C_{i,j} = A_{i,j} + b_j \]
+	
+	Matrix product (dot product):
+	\[ \bol{C} = \bol{A}\bol{B}, \text{ where } C_{i,j} = \sum_k A_{i,k} B_{k,j} \]
+	The resulting dimensions are: $(q\times p)=(q\times k)(k\times p)$
+	
+	Element-wise (Hadamard) product: 
+	\[ \bol{C} = \bol{A} \odot \bol{B}, \text{ where } C_{i,j}=A_{i,j}B_{i,j} \]
+	
+	\subsection{Solving an equation}
+	The inverse Matrix $\bol{A}^{-1}$ is equal to $\bol{A}^T$ if $\bol{A}$ is orthogonal.
+	\[ \bol{A}^{-1}\bol{A} = \bol{I}_n \]
+	
+	Solving $\bol{A}\bol{x}=\bol{b}$:
+	\begin{align*}
+		\bol{A}\bol{x} &= \bol{b}\\
+		\bol{A}^{-1}\bol{A}\bol{x}&=\bol{A}^{-1}\bol{b}\\
+		\bol{I}_n\bol{x}&=\bol{A}^{-1}\bol{b}\\
+		\bol{x}&=\bol{A}^{-1}\bol{b}\\
+	\end{align*}
+	If we want this equation to have at most one solution (i.e., $\bol{A}^{-1}$ exists), we require that there are at most $m$ columns. Hence for $\bol{A}^{-1}$ to exist, we require $m=n$, where all the columns are linearly independent.
+	\begin{itemize}
+		\item This is an invertible (non-singular) square matrix
+		\item If a square matrix has linearly independent columns, it is called a singular matrix
+	\end{itemize}
+	
+	\subsection{Norms}
+	A norm $L^p$ is a way to measure the length of a vector.
+	\[ \lVert \bol{x} \rVert_p = \left( \sum_i \lvert x_i\rvert^p \right)^{\frac{1}{p}} \]
+	
+	Since the Euclidean norm $L^2$ is the most common norm, it is often written as $\lVert\bol{x}\rVert$
+	\[ \lVert\bol{x}\rVert = \sqrt{\lvert x_1 \rvert^2 + \lvert x_2 \rvert^2 + \cdots + \lvert x_n \rvert^2} \]
+	
+	The squared $L^2$ norm can be conveniently calculated as $\lVert\bol{x}\rVert^2=\bol{x}^T\bol{x}$\\
+	
+	Close to zero, the squared $L^2$ norm increases very slowly. For algorithms which depend on the difference between zero and almost zero, the $L^1$ norm is used.
+	\[ \lVert\bol{x}\rVert_1 = \sum_i \lvert x_i\rvert \]
+	
+	The so-called $L^0$ \textit{norm} is used to count the number of non-zero elements.\\
+	
+	The $L^\infty$ norm is also known as the max norm:
+	\[ \lVert\bol{x}\rVert_\infty = \underset{i}{\max}\lvert x_i \rvert \]
+	
+	To measure the size of a matrix, the Frobenius norm is used, which is basically the $L^2$ norm of vectors applied to matrices:
+	\[ \lVert \bol{A}\rVert_F = \sqrt{\sum_{i,j} A_{i,j}^2 }  \]
+	
+	\subsection{Special Kinds of Matrices and Vectors}
+	A diagonal matrix is all zero, except in the diagonal:
+	\[ D_{i,j} = 0 \text{ for all } i\neq j \]
+	
+	It is often denoted as $\text{diag}(\bol{v})$. Multiplying becomes quite fast:
+	\[ \text{diag}(\bol{v})\bol{x} = \bol{v}\odot \bol{x} \]
+	
+	Inverting diagonal matrices is only possible, if all diagonal elements are \textbf{non-zero}:
+	\[ \text{diag}(\bol{v})^{-1} = \text{diag}\left( \left[ 1/v_1,\dots ,1/v_n \right]^T \right) \]
+	
+	A symmetric matrix is a matrix that is equal to its transpose: $\bol{A} = \bol{A}^T$\\
+	
+	An orthogonal matrix is a square matrix whose rows are mutually orthonormal and whose columns are mutually orthonormal:
+	\[ \bol{A}^T\bol{A} = \bol{A}\bol{A}^T = \bol{I} \]
+	
+	\subsection{Eigendecomposition}
+	An \textbf{eigenvector} of $\bol{A}$ is a non-zero vector $\bol{v}$ that satisfies the eigen-equation
+	\[ \bol{A}\bol{v} = \lambda\bol{v} \]
+	The scalar $\lambda$ is the corresponding eigenvalue.
+	\[ \det(\bolA - \lambda \bol{I}) = 0 \]
+	\[ \lambda_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2a} \]
+	Since the eigenvector $\bol{v}$ could be scaled arbitrarily, and the eigen-equation would still hold, we usually scale the eigenvectors to have a length of one (unit vector).\\
+	
+	Assume that $\bol{A}$ has $n$ linearly independent eigenvectors $\left \{ \bolv^{(1)},\dots,\bolv^{(n)}  \right \} $ and corresponding eigenvalues $ \left \{ \lambda_1,\dots,\lambda_n \right \} $.\\
+	Now we can concatenate these eigenvectors to form a matrix $\bol{V} = \left[ \bolv^{(1)},\dots,\bolv^{(n)} \right]$ and concatenate the corresponding eigenvalues to form the vector $\bol{\lambda} = \left[ \lambda_1,\dots,\lambda_n \right]^T$.
+	The Eigendecomposition of $\bolA$ is now given by the equation
+	\[ \bolA = \bol{V}\diag(\bol{\lambda})\bol{V}^{-1} \]
+	
+	Every real symmetric matrix can be written using only real eigenvalues
+	\[ \bolA = \bol{Q}\bol{\Lambda}\bol{Q}^T \]
+	where $\bol{Q}$ is a orthogonal matrix composed of the unit eigenvectors of $\bolA$ and $\bol{\Lambda}$ is a diagonal matrix containing the corresponding eigenvectors in the diagonal. Note that $\bolA$ is singular, if and only if any of the eigenvalues are zero.
+	
+%	\subsection{Singular Value Decomposition (SVD)}
+%	\subsection{Moore-Penrose Pseudoinverse}
+	\subsection{Trace Operator}
+	The trace operator simply returns the sum of all the diagonal elements in a square matrix:
+	\[ \text{Tr}(\bolA) = \sum_i A_{i,i} \]
+	Often the trace operator can be used to replace a sum over some squared errors.
+	For example, the Frobenius norm can be written as:
+	\[ \lVert \bolA \rVert_F = \sqrt{\text{Tr}\left(\bolA\bolA^T\right)} \]
+	
+	If the shapes of the involved matrixes allow a circular shift, than the trace operator is invariant to this circular shift:
+	\[ \text{Tr}(\bolA\bol{B}\bol{C}) = \text{Tr}(\bol{C}\bolA\bol{B}) = \text{Tr}(\bol{B}\bol{C}\bolA) \]
+	Note that the result, and even the final shape, of these shifted matrix products are usually not the same, but their traces are.
+	Further, the trace is the \textbf{sum of the eigenvalues}.
+	
+	\subsection{Determinant}
+	\begin{itemize}
+		\item The determinant $\det(\bolA)$ is equal to the \textbf{product of all the eigenvalues} of the matrix.
+		Hence, if there is a zero-valued eigenvalue, the determinant will also be zero. In fact, this will then be a \textbf{singular} matrix, having \textbf{no unique inverse}.
+		\item The absolute value of the determinant is a measure how much a space expands due to the multiplication with this matrix
+		\begin{itemize}
+			\item Hence if the determinant is zero, at least one dimension of the space collapsed
+			\item If the determinant is one, than the multiplication is volume preserving
+		\end{itemize}
+	\end{itemize}
+	The determinant of a product of square matrices equals the product of their determinants:
+	\[ \det(\bol{A}\bol{B}) = \det(\bolA)\cdot \det(\bol{B})  \]
+	Calculation of the determinant of a $(3\times 3)$ matrix:
+	\begin{align*}
+	&\det \begin{bmatrix} a&b&c\\d&e&f\\g&h&i \end{bmatrix}\\
+	&= a\cdot\det \begin{bmatrix} e&f\\h&i \end{bmatrix} -
+	   b\cdot\det \begin{bmatrix} d&f\\g&i \end{bmatrix} +
+	   c\cdot\det \begin{bmatrix} d&e\\g&h \end{bmatrix}\\
+	&= a(ei-fh) - b(di-fg) + c(dh-eg)\\
+	&= aei + bfg + cdh - afh - bdi - ceg
+	\end{align*}
+	
+\end{multicols}
+\newpage
+
+
+
+
+%\subsection{Fundamentals\buchSeite{690}}
+%\begin{multicols}{2}
+%\begin{enumerate}[label={\alph*)}]
+%\item $\bigcup\limits_{i=1}^{n}R_i=R$
+%\item $R_i$ is a connected set, $i=1,2,\dots ,n$
+%\item $R_i\bigcap R_j = 0$ for all $i$ and $j, i\neq j$
+%\item $Q(R_i)=$ TRUE for $i=1,2,\dots ,n$
+%\item $Q(R_i\bigcup R_j)=$ FALSE for any adjacent regions $R_i$ and $R_j$
+%\end{enumerate}
+%\vfill
+%\columnbreak
+%\begin{itemize}
+%\item The entire spatial region that is occupied by an image is called $R$
+%\item Image segmentation is the task of partitioning $R$ into sub-regions $R_i$
+%\item $Q()$ is a measure of similarity of a particular property
+%\item d) must be true, since it defines the region
+%\item e) must be false, since otherwise, the regions should have been merged
+%\end{itemize}
+%\end{multicols}
+%
+%Focus on the intensity values
+%\begin{itemize}
+%\item If there are discontinuities, a new region starts.
+%\item If the intensity does not vary much, then this is one region.
+%\end{itemize}
+%
+%\subsection{Point, line and edge detection\buchSeite{692}}
+%When the intensity changes abruptly in a local neighborhood, this indicates an edge. It can be a simple point or a line.
+%
+%\begin{multicols}{2}
+%\subsubsection{Background\buchSeite{692}}
+%Abrupt local changes can be detected using derivatives.\\
+%First order derivative
+%\[
+%	\frac{\partial f}{\partial x} = f'(x)=f(x+1)-f(x)
+%\]
+%The second order derivative
+%\[
+%	\frac{\partial^2f}{\partial x^2}=\frac{\partial f'(x)}{\partial x}=f''(x)=f(x+1)+f(x-1)-2f(x)
+%\]
+%This can be calculated using a spatial filter.
+%\[
+%	\begin{bmatrix}
+%	w_1, w_2, w_3\\
+%	w_4, w_5, w_6\\
+%	w_7, w_8, w_9
+%	\end{bmatrix}
+%\]
+%
+%\columnbreak
+%
+%\begin{itemize}
+%\item First order in y direction \\ $w_6=1, w_5=-1$
+%\item First order in x direction \\ $w_8=1, w_5=-1$
+%\item Second order in y direction \\ $w_6=1, w_4=1, w_5=-2$
+%\item Second order in x direction \\ $w_8=1, w_2=1, w_5=-2$
+%\end{itemize}
+%\ \\
+%\end{multicols}
+%\subsubsection{Detection of Isolated Points\buchSeite{696}}
+%The Laplacian combines the second derivatives in both spatial directions. This results in
+%\[
+%	\nabla^2f(x,y)=f(x+1,y)+f(x-1,y)+f(x,y+1)+f(x,y-1)-4f(x,y)
+%\]
+%It can be extended to also include the diagonal terms wich results in the following mask
+%\[
+%	\begin{bmatrix}
+%	 1 & 1 & 1\\
+%	 1 & -8 & 1\\
+%	 1 & 1 & 1
+%	\end{bmatrix}
+%\]
+%The Laplacian is isotropic with respect to $0^\circ$, $45^\circ$, $90^\circ$ and $135^\circ$. \\
+%
+%Point detection is now achieved by filtering the image with the mask and thresholding this result image $R$.
+%\[
+%	g(x,y) = 
+%	\begin{cases}
+%		1 & \text{if } |R(x,y)| \geq T \\
+%		0 & \text{otherwise}
+%	\end{cases}
+%\]
+%
+%\subsubsection{Line Detection\buchSeite{697}}
+%Often, a line of a known direction should be detected. We use special masks for that particular direction
+%\begin{figure}[H]
+%	\centering
+%	\begin{subfigure}[b]{0.2\textwidth}
+%		\centering
+%		\begin{tikzpicture}
+%			\matrix[3x3mask]{
+%				-1 & -1 & -1 \\%
+%		    	2  & 2  & 2 \\%
+%				-1 & -1 & -1\\};
+%		\end{tikzpicture}
+%		\caption{Horizontal}
+%	\end{subfigure}
+%	\begin{subfigure}[b]{0.2\textwidth}
+%		\centering
+%		\begin{tikzpicture}
+%			\matrix[3x3mask]{
+%				2  & -1 & -1 \\%
+%				-1 & 2  & -1 \\%
+%				-1 & -1 & 2 \\%
+%			};
+%		\end{tikzpicture}
+%		\caption{$+45^\circ$}
+%	\end{subfigure}
+%	\begin{subfigure}[b]{0.2\textwidth}
+%		\centering
+%		\begin{tikzpicture}
+%			\matrix[3x3mask]{
+%				-1  & 2 & -1 \\%
+%				-1 & 2  & -1 \\%
+%				-1 & 2 & -1 \\%
+%				};
+%		\end{tikzpicture}
+%		\caption{Vertical}
+%	\end{subfigure}
+%	\begin{subfigure}[b]{0.2\textwidth}
+%		\centering
+%		\begin{tikzpicture}
+%			\matrix[3x3mask]{
+%				-1 & -1 & 2 \\%
+%				-1 & 2  & -1 \\%
+%				2  & -1 & -1 \\%
+%			};
+%		\end{tikzpicture}
+%		\caption{$-45^\circ$}
+%	\end{subfigure}
+%	\caption{Line detection masks}
+%\end{figure}
+%
+%\subsubsection{Edge Models}
+%The typical intensity profile of an edge is shown in figure \ref{fig:imseg_edgemodels}.
+%Note that the derivatives are very sensitive to noise. Usually the image is smoothed (low pass filtered) before
+%edge detection.
+%
+%\newpage
+%\subsubsection{Edge localization\buchSeite{706}}
+%\begin{multicols}{2}
+%The previously shown method generates edge points. The goal is to keep the ones which truly belong to an edge.
+%Since first order derivatives are helpful, a nice way of combining the two partial derivatives into one value is the magnitude of the gradient.
+%\columnbreak
+%\begin{equation}
+%\nabla f = \text{grad}(f) = 
+%\begin{bmatrix} g_x \\ g_y \end{bmatrix} 
+%= \begin{bmatrix} \frac{\partial f}{\partial x} \\[4pt] \frac{\partial f}{\partial y} \end{bmatrix}\notag
+%\end{equation}
+%\end{multicols}
+%The gradient (which is a vector) points into the direction of the greatest rate of change of $f$ at the location $(x,y)$ and is therefore orthogonal to the direction of the edge, which has no change.
+%The magnitude of the gradient vector is the value of the rate of change in that direction.
+%\begin{figure}[H]
+%	\centering
+%	\begin{subfigure}[b]{0.2\textwidth}
+%		\centering
+%		\begin{tikzpicture}
+%			\matrix[3x3mask]{
+%				-1 & -1 & -1 \\%
+%				0  & 0 & 0 \\%
+%				1  & 1 & 1 \\%
+%			};
+%		\end{tikzpicture}
+%		\caption{Prewitt}
+%	\end{subfigure}
+%	\begin{subfigure}[b]{0.2\textwidth}
+%		\centering
+%		\begin{tikzpicture}
+%			\matrix[3x3mask]{
+%				-1 & 0 & 1 \\%
+%				-1 & 0 & 1 \\%
+%				-1 & 0 & 1 \\%
+%			};
+%		\end{tikzpicture}
+%		\caption{Prewitt}
+%	\end{subfigure}
+%	\begin{subfigure}[b]{0.2\textwidth}
+%		\centering
+%		\begin{tikzpicture}
+%			\matrix[3x3mask]{
+%				-1 & -2 & -1 \\%
+%				0 & 0 & 0 \\%
+%				1 & 2 & 1 \\%
+%			};
+%		\end{tikzpicture}
+%		\caption{Sobel}
+%	\end{subfigure}
+%	\begin{subfigure}[b]{0.2\textwidth}
+%		\centering
+%		\begin{tikzpicture}
+%			\matrix[3x3mask]{
+%				-1 & 0 & 1 \\%
+%				-2 & 0 & 2 \\%
+%				-1 & 0 & 1 \\%
+%			};
+%		\end{tikzpicture}
+%		\caption{Sobel}
+%	\end{subfigure}
+%	\caption{Gradient operators: Prewitt and Sobel masks}
+%\end{figure}
+
+\newpage

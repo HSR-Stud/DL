@@ -1,0 +1,98 @@
+\section{Deep Feedforward Networks}
+\begin{multicols}{2}
+	\subsection{Chain Rule}
+	\textbf{Scalar chain rule:}
+	\[ \frac{\partial z}{\partial x} = \frac{\partial z}{\partial y} \frac{\partial y}{\partial x} \]
+	
+	If $\bol{y}=g(\bol{x})$ and $z = f(\bol{y})$, then (\textbf{Vector chain rule}):
+	\[ \frac{\partial z}{\partial x_i} = \sum_j \frac{\partial z}{\partial y_j} \frac{\partial y_j}{\partial x_i} \]
+	
+	In vector notation, this may be equivalently written as
+	\[ \nabla_x z = \left( \frac{\partial \bol{y}}{\partial \bol{x}} \right)^T \nabla_y z
+	= \sum_{j=1}^{m}(\nabla_xy_j) \frac{\partial z}{\partial y_j} \]
+	
+	\textbf{Tensor chain rule:}
+	\[ \nabla_{\bm{\mathsf{x}}} z = \sum_j (\nabla_{\bm{\mathsf{x}}} \bol{Y}_j )\frac{\partial z}{\partial \bol{Y}_j} \]
+	
+	
+	
+	\subsection{Output Units\buch{Chapter 6.2.2}\buchSeite{180}}
+	The choice of cost function is tightly coupled with the choice of output unit. Most	of the time, we simply use the cross-entropy between the data distribution and the	model distribution. The choice of how to represent the output then determines the form of the cross-entropy function.\\
+	
+	\subsubsection{Linear Units for Gaussian Output Distributions}
+	One simple kind of output unit is an output unit based on an affine transformation with no nonlinearity. These are often just called linear units.
+	Given features $\vh$, a layer of linear output units produces a vector $\hat{y} = \mW ^\top \vh + b$.\\
+	Maximizing the log-likelihood is then equivalent to minimizing the mean squared	error.
+	
+	
+	\subsubsection{Sigmoid Units for Bernoulli Output Distributions}
+	Sigmoid units are the standard output units for binary output variables.
+	The use of the maximum likelihood approach is to define a Bernoulli distribution over $y$ conditioned on $\bol{x}$:
+	\[ P(y=1|\bol{x}) \]
+	A Bernoulli distribution is defined by the probability of the event occurring, which can be stated as
+	\[ P(y=1|\bol{x}) = \max \left\{ 0,\min \left\{ 1, \bol{w}^T\bol{h}+b \right\} \right\} \]
+	While this hard limited linear function results in a valid conditional distribution, gradient descent could not train this efficiently, since the slope is zero for large and small values.
+	The \textbf{sigmoid function} is a form of a soft limited linear function and hence the slope does never become exactly zero, though at large values it does become quite small:
+	\[ \hat{y} = \sigma \left(\bol{w}^T\bol{h}+b\right) \]
+
+
+	\subsubsection{Softmax Units for Multinoulli Output Distributions}
+	Any time we wish to represent a probability distribution over a discrete variable with n possible values, we may use the softmax function. This can be seen as a	generalization of the sigmoid function which was used to represent a probability distribution over a binary variable.\\
+	In the case of binary variables, we wished to produce a single number
+	\[ \hat{y} = P(y = 1 \mid \textbf{x})\]
+	
+	To generalize to the case of a discrete variable with n values, we now need	to produce a vector $\hat{\vy}$, with $\hat{\vy_{i}} = P(y = i \mid \textbf{x})$. We require not only that each element of $\hat{\vy}$ be between 0 and 1, but also that the entire vector sums to 1 so that it represents a valid probability distribution.\\
+	First, a linear	layer predicts unnormalized log probabilities:
+	\[ \vz =  \mW^\top \vh + \vb\]
+	
+	where $z_{i} = \log(\tilde{P}(y = i \mid x)$. The softmax function can then exponentiate and	normalize $\vz$ to obtain the desired $\hat{\vy}$. Formally, the softmax function is given by
+	\[ \softmax(\vz)_{i} = \frac{\exp(\vz_{i})}{\sum \exp(\vz_{j})} \]
+	
+	As with the logistic sigmoid, the use of the exp function works very well when training the softmax to output a target value y using maximum log-likelihood. In this case, we wish to maximize $\log P(y = i; z) = \log \softmax(z)_i$. Defining the softmax in terms of exp is natural because the log in the log-likelihood can undo the exp of the softmax:
+	
+	\[ \log \softmax(\vz)_{i} = \frac{\exp(\vz_{i})}{\sum \exp(\vz_{j})} \]
+	
+
+	\subsubsection{Other Output Types\buch{chapter 6.2.2.4}\buchSeite{182}}
+	\newpage
+\end{multicols}
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.65\linewidth]{images/comic.PNG}
+%\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

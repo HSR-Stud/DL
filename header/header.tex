@@ -1,0 +1,71 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Makros & anderer Low-Level bastel %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+%% Makros für Titel, Autor und Datum 
+%% Dank diesem Makro stehen Titel, Autor und Datum überall im Dokument zur verfügung
+%% Date hat zudem den Default-Wert \today
+\def\@Title{}
+\def\@Author{}
+\def\@Date{\today}
+\newcommand{\Title}{\@Title}
+\newcommand{\Author}{\@Author}
+\newcommand{\Date}{\@Date}
+\AtBeginDocument{%
+  \let\@Title\@title
+  \let\@Author\@author
+  \let\@Date\@date
+}
+
+%% Makros für den Arraystretch (bei uns meist in Tabellen genutzt, welche Formeln enthalten)
+% Default Value
+\def\@ArrayStretchDefault{1} % Entspricht der Voreinstellung von Latex
+
+% Setzt einen neuen Wert für den arraystretch
+\newcommand{\setArrayStretch}[1]{\renewcommand{\arraystretch}{#1}}
+
+% Setzt den arraystretch zurück auf den default wert
+\newcommand{\resetArrayStretch}{\renewcommand{\arraystretch}{\@ArrayStretchDefault}}
+
+% Makro zum setzten des Default arraystretch. Kann nur in der Präambel verwendet werden.
+\newcommand{\setDefaultArrayStretch}[1]{%
+	\AtBeginDocument{%
+		\def\@ArrayStretchDefault{#1}
+		\renewcommand{\arraystretch}{#1}
+	}
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Wichtige Packages %%
+%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc} % UTF-8 unterstützung
+%\usepackage{newtxtext}
+%\usepackage[T1]{fontenc}
+%\usepackage{txfonts}
+%\usepackage[light,math]{kurier}
+%\usepackage[adobe-utopia]{mathdesign}
+%\usepackage{fourier}
+%\usepackage{fouriernc}
+\usepackage{newtxtext,newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage[english, ngerman]{babel} % Silbentrennung
+\usepackage[automark]{scrpage2} % Header und Footer
+\usepackage{tabularx}
+\usepackage{paralist} % Compactitem
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+
+% Für Abbildungen mit mehreren kleinen Bilder
+% Doku: http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+% Large TODO note
+\newcommand{\todo}[1]{%
+    \marginpar{\textcolor{red}{ToDo}}%
+    \colorbox{red}{\parbox{\linewidth}{\sffamily\textcolor{white}{#1}}}%
+    \PackageWarning{ToDo:}{#1!}%
+}
