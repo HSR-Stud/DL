@@ -180,7 +180,7 @@
 	\subsection{Kullback-Leibler Divergence}
 	The KL divergence can be used to measure how different two distributions P and Q are:
 	\[ D_{\text{KL}}(P\lVert Q) = \Exp_{x\sim P}\left[\log \frac{P(x)}{Q(x)}\right]=
-	\Exp_{x\sim P}\left[\log {P(x)} \log {Q(x)}\right]
+	\Exp_{x\sim P}\left[\log {P(x)} - \log {Q(x)}\right]
 	 \]
 	For discrete RVs this is the extra amount of information needed to send a message with symbols drawn from $P$, when the code was designed for $Q$.
 	The \textbf{cross entropy} $H(P,Q)$ is the minimum average amount of information needed to transmit symbols drawn from $P(.)$ using a code designed for $Q(.)$:
