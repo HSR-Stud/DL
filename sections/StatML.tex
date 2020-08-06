@@ -6,11 +6,10 @@
 		MSE & Mean of the squared error between the true value of the output variable and its predicted value:
 		\[ E(Y-\hat{Y})^2 = E\lbrack f(X)+\epsilon -\hat{f} (X)\rbrack ^2 = \underbrace{\lbrack f(X) -\hat{f} (X)\rbrack
 			^2}_\text{Reducible} + \underbrace{Var(\epsilon ) }_\text{Irreducible} \] \\
-		Inference &  Relationship between the input variables (predictors) and the resulting output variable (response). 
+		Inference &  Relationship between the input variables (predictors) and the resulting output variable (response).
 		Often $\beta$ is used:
 		\[ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p \] \\
-		OLS & The scheme called ordinary least squares can be used to find the parameters which results in a function $f$ 
-		that fits the training data: \( Y \approx{} f(X) \) \\
+		OLS & The scheme called ordinary least squares can be used to find the parameters which results in a function $f$ that fits the training data: \( Y \approx{} f(X) \) \\
 		Regression & If the response variable $Y$ is is numerical, we have a regression problem \\
 		Classification & If the response variable $Y$ is categorical, we have a classification problem \\
 		Quantitative & Numerical variables i.e. Temperature in degree, velocity in m/s, etc... \\
@@ -22,19 +21,14 @@
 \subsubsection{Assessing Model Accuracy}
 \begin{onehalfspace}
 	\begin{tabularx}{\textwidth}{p{3cm}X}
-		Measuring prediction performance & One popular measure is the MSE. Since the MSE is calculated using the training 
-		data, this is really the training MSE \[ MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{f} (x_i))^2 \] 
+		Measuring prediction performance & One popular measure is the MSE. Since the MSE is calculated using the training data, this is really the training MSE \[ MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{f} (x_i))^2 \]
 		Low training MSE does NOT imply low testing MSE! \\
-		Bias vs. Variance & The variance refers to the amount by which the estimate of $f$ would change if we estimated 
-		it using a different training set whereas the bias refers to the error introduced by approximating a real-life 
-		problem by a model
-		\[ E(y_0 -\hat{f}(x_0))^2 = Var(\hat{f}(x_0)) + \lbrack Bias(\hat{f}(x_0))\rbrack ^2 +Var(\epsilon ) \] 
+		Bias vs. Variance & The variance refers to the amount by which the estimate of $f$ would change if we estimated it using a different training set whereas the bias refers to the error introduced by approximating a real-life	problem by a model
+		\[ E(y_0 -\hat{f}(x_0))^2 = Var(\hat{f}(x_0)) + \lbrack Bias(\hat{f}(x_0))\rbrack ^2 +Var(\epsilon ) \]
 		\[ Bias(\hat{f}(x_0)) = E\lbrack f(x_0)-\hat{f}(x_0)\rbrack \] \\
-		Classification error & The quality of the estimated function $f$ can not be measured using MSE since the output $Y$ 
-		is categorical. Therefore the following definition of a training error rate is used:
+		Classification error & The quality of the estimated function $f$ can not be measured using MSE since the output $Y$ is categorical. Therefore the following definition of a training error rate is used:
 		\[ \frac{1}{n} \sum_{i=1}^{n} I(y_i\neq \hat{y}_i) \] \\
-		KNN & The K-nearest neighbors is used for classification problems. As the name suggests, the K-nearest data points 
-		"vote"{} to which class a new point belongs. \\
+		KNN & The K-nearest neighbors is used for classification problems. As the name suggests, the K-nearest data points	"vote"{} to which class a new point belongs. \\
 	\end{tabularx}
 \end{onehalfspace}
 
@@ -42,22 +36,19 @@
 \subsubsection{Simple Linear Regression}
 \begin{onehalfspace}
 	\begin{tabularx}{\textwidth}{p{3cm}X}
-		Estimating coefficients & In practice the coefficients are unknown and need to be learned (estimated) from the n
-		training data sets \( (x_1,y_1), (x_2,y_2),..., (x_n,y_n) \). The goal of the estimation process is, that the two
-		parameters are found such that each training data set is estimated as close as possible:
+		Estimating coefficients & In practice the coefficients are unknown and need to be learned (estimated) from the n training data sets \( (x_1,y_1), (x_2,y_2),..., (x_n,y_n) \). The goal of the estimation process is, that the two parameters are found such that each training data set is estimated as close as possible:
 		\( \hat{y}_i = \hat{\beta}_0+\hat{\beta}_1 x_i \) \\
-		Residuals & The residuals are defined as the difference between the measured and the estimated output value: 
+		Residuals & The residuals are defined as the difference between the measured and the estimated output value:
 		\( e_i = y_i-\hat{y}_i \) \\
-		RSS & The residual sum of squares is one approach to define the closeness of the coefficients to the real values. It
-		is defined as \( RSS = e^2_1+e^2_2+...+e^2_n = \mysum (y_i-\hat{y}_i)^2\) 
+		RSS & The residual sum of squares is one approach to define the closeness of the coefficients to the real values. It	is defined as \( RSS = e^2_1+e^2_2+...+e^2_n = \mysum (y_i-\hat{y}_i)^2\)
 		Good models result in a small RSS. \\
 		TSS & The total sum of squares is $n$ times the sample variance of the residual $(y-\hat{y})$:
-		\[ RSS=\mysum (y_i-\hat{y}_i)^2 \] TSS only depends on the data, not on the model. 
+		\[ RSS=\mysum (y_i-\hat{y}_i)^2 \] TSS only depends on the data, not on the model.
 		The expression $\frac{TSS-RSS}{p}$ calculates the improvement by the model per parameter $p$ for all samples $n$. \\
 		Sample Mean & \[ \bar{x} \equiv{} \frac{1}{n} \sum_{i=1}^{n} x_i  \qquad
 		\bar{y} \equiv{} \frac{1}{n} \sum_{i=1}^{n} y_i \] \\
 		Least Squares & The least squares approach selects the two parameters such, that the RSS is minimized:
-		\[ \hat{\beta}_1 = \frac{\sum_{i=1}^{n} (x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^{n} (x_i-\bar{x})^2}  \qquad 
+		\[ \hat{\beta}_1 = \frac{\sum_{i=1}^{n} (x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^{n} (x_i-\bar{x})^2}  \qquad
 		\hat{\beta}_0 = \bar{y}-\hat{\beta}_1 \bar{x} \] \\
 	\end{tabularx}
 \end{onehalfspace}
@@ -65,31 +56,22 @@
 \subsubsection{Assessing the Accuracy of the Coefficient estimates}
 \begin{onehalfspace}
 	\begin{tabularx}{\textwidth}{p{3cm}X}
-		Accuracy & If the relationship $Y = f(X)+\epsilon$, where the function $f$ is unknown and the error $\epsilon$ is 
-		random with mean zero, is assumed to be true, then it can be written as $Y = \beta_0+\beta_1 X+\epsilon$ \\
+		Accuracy & If the relationship $Y = f(X)+\epsilon$, where the function $f$ is unknown and the error $\epsilon$ is	random with mean zero, is assumed to be true, then it can be written as $Y = \beta_0+\beta_1 X+\epsilon$ \\
 		SE & The standard error tells us the average amount this estimate differs from the true value
 		\[ SE(\hat{\mu})^2 = Var(\hat{\mu}) = \frac{\sigma^2}{n} \qquad \sigma^2 = Var(\epsilon) \]
-		The following formulas are approximations which assume that the errors for each observation are uncorrelated with
-		the common variance, which is not strictly true. Nevertheless, these formulas show that these estimators are
-		consistent:
+		The following formulas are approximations which assume that the errors for each observation are uncorrelated with	the common variance, which is not strictly true. Nevertheless, these formulas show that these estimators are	consistent:
 		\[ SE(\hat{\beta}_0)^2 = \sigma^2 \left[ \frac{1}{n}+\frac{\bar{x}^2}{\sum_{i=1}^{n}(x_i-\bar{x})^2} \right] \qquad
 		SE(\hat{\beta}_1)^2 = \frac{\sigma^2}{\mysum (x_i-\bar{x})^2}  \] \\
-		Null Hypothesis & The most common hypothesis test involves testing the null hypothesis versus the alternative 
-		hypothesis: \[ H_0 : \beta_1 = 0 \rightarrow \text{There is no relationship between } X \text{ and } Y \]
+		Null Hypothesis & The most common hypothesis test involves testing the null hypothesis versus the alternative	hypothesis: \[ H_0 : \beta_1 = 0 \rightarrow \text{There is no relationship between } X \text{ and } Y \]
 		\[ H_a : \beta_1 \neq 0 \rightarrow \text{There is some relationship between } X \text{ and } Y \]
-		If there is no relationship, we would expect the slope to be zero. Since the slope is never really exactly zero, we
-		need to measure how far away the slope is from zero\\
+		If there is no relationship, we would expect the slope to be zero. Since the slope is never really exactly zero, we need to measure how far away the slope is from zero\\
 	\end{tabularx}
-		
+
 	\begin{tabularx}{\textwidth}{p{3cm}X}
-		t-Statistics & The solution to test the null hypothesis is to express the estimate of the slope in multiples of the
-		standard error, calculating the so called t-statistics: \[ t = \frac{\hat{\beta}_1 - 0}{SE(\hat{\beta}_1}) \]
-		If there is no relationship between $X$ and $Y$ then the random variable t should have a t-distribution with
-		$n-2$ degrees of freedom. For $n>30$ the t-distribution is very similar to a normal (Gaussian) distribution\\
-		$R^2$-Statistics & The $R^2$-Statistics is the proportion of the variance explained by the model and hence it takes
-		values between $0$ and $1$. This makes it independent of the units of $Y$. It measures the proportion of variability
-		in $Y$ that can be explained using $X$: 
-		\[ R^2=\frac{TSS-RSS}{TSS}=1-\frac{RSS}{TSS}=1-\frac{\mysum (y_i-\hat{y}_i)^2}{\mysum (y_i-\bar{y})^2} \] 
+		t-Statistics & The solution to test the null hypothesis is to express the estimate of the slope in multiples of the	standard error, calculating the so called t-statistics: \[ t = \frac{\hat{\beta}_1 - 0}{SE(\hat{\beta}_1)} \]
+		If there is no relationship between $X$ and $Y$ then the random variable $t$ should have a t-distribution with	$n-2$ degrees of freedom. For $n>30$ the t-distribution is very similar to a normal (Gaussian) distribution\\
+		$R^2$-Statistics & The $R^2$-Statistics is the proportion of the variance explained by the model and hence it takes values between $0$ and $1$. This makes it independent of the units of $Y$. It measures the proportion of variability in $Y$ that can be explained using $X$:
+		\[ R^2=\frac{TSS-RSS}{TSS}=1-\frac{RSS}{TSS}=1-\frac{\mysum (y_i-\hat{y}_i)^2}{\mysum (y_i-\bar{y})^2} \]
 		For simple linear regression the $R^2$-Statistic is identical to the sample correlation squared:
 		\[ Cor(X,Y)=\frac{\mysum (x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\mysum (x_i-\bar{x})^2}\sqrt{\mysum (y_i-\bar{y})^2}} \]
 		\\
@@ -100,39 +82,36 @@
 \end{onehalfspace}
 
 \subsubsection{Multiple Linear Regression}
-In general, the multiple linear regression model takes on the following form, 
+In general, the multiple linear regression model takes on the following form,
 each predictor variable gets its own slope and there is a common intercept:
 \[ Y=\beta_0+\beta_1X_1+\beta_2X_2+...+\beta_pX_p+\epsilon \]
-One interpretation of a particular slope $\beta_j$ is, that it captures the average effect on $Y$ of one unit increase in $X_j$,
-holding all other predictors fixed. Just as in the simple regression case, the coefficients (parameters) are estimated in such
-a way, that the sum of squared residuals in the training data is minimized:
+One interpretation of a particular slope $\beta_j$ is, that it captures the average effect on $Y$ of one unit increase in $X_j$, holding all other predictors fixed. Just as in the simple regression case, the coefficients (parameters) are estimated in such a way, that the sum of squared residuals in the training data is minimized:
 \[ RSS=\mysum(y_i-\bar{y}_i)^2=\mysum(y_i-\hat{\beta}_0-\hat{\beta}_1x_{i1}-\hat{\beta}_2x_{i2}-...-\hat{\beta}_px_{ip})^2 \]
 
 
 
 \subsection{Classification}
 \subsubsection{An Overview of Classification}
-Why not linear regression for qualitative responses? $\rightarrow$ Because  coding  responses  implies  an order  and  a  distance, i.e. 
-\[ Y = \begin{cases} 
-1\texttt{ if stroke} \\ 2\texttt{ if drug overdose} \\ 3\texttt{ if epileptic seizure} 
+Why not linear regression for qualitative responses? $\rightarrow$ Because  coding  responses  implies  an order  and  a  distance, i.e.
+\[ Y = \begin{cases}
+1\texttt{ if stroke} \\ 2\texttt{ if drug overdose} \\ 3\texttt{ if epileptic seizure}
 \end{cases}  \]
 Now the coding created an  order and also implies that  selecting  stroke,  if  it  is  really  a drug  overdose  is  equally  bad  as  selecting epileptic  seizure,  if  it  is  really  a  drug overdose \\
 
 \subsubsection{Logistic Regression}
-Instead  of modeling  the response,  logistic  regression models  the  probability  that  the response  belongs  to  a  particular category.
-Hence the idea is  to  use  the  logistics function,  which goes  in  an S-shape smoothly  from  0  to 1  and  model  its argument  
-using  a  linear  model:
+Instead of modeling the response, logistic regression models the probability that the response belongs to a particular category.
+Hence the idea is to use the logistics function, which goes in an S-shape smoothly from 0 to 1 and model  its argument using a linear model:
 \[ p(X) = \frac{e^{\beta_0+\beta_1X}}{1+e^{\beta_0+\beta_1X}}  \]
-With some  manipulation the following  equation  results,  where  the term  on the  left  hand  side  is  called the  odds:
+With some manipulation the following equation results, where the term on the left hand side is called the  odds:
 \[ \frac{p(X)}{1-p(X)} = e^{\beta_0+\beta_1X} \qquad \rightarrow \qquad \log \left( \frac{p(X)}{1-p(X)} \right) = \beta_0+\beta_1X\]
 
-\subsubsection{Estimating the Regression Coefficients} 
-\paragraph*{The basic approach}for  finding  the unknown  coefficients  given  the training  data  is  called  the  maximum likelihood  approach.
-The goal  is  to  pick  the  coefficients  in such a  way,  that  the  probability  of the  model  having  created  the observed  data  is  maximized.
+\subsubsection{Estimating the Regression Coefficients}
+\paragraph*{The basic approach}for finding the unknown coefficients given the training data is called the maximum likelihood approach.
+The goal is to pick the coefficients in such a way, that the probability of the model having created the observed data is maximized.
 \[ \ell (\beta_0,\beta_1) = \prod_{i:y_i=1} p(x_i) \prod_{i':y_{i'}=1} (1 - p(x_{i'})) \]
-If we assume that all  training  data is statistically  independent,  then the  total probability  is  simple  the  product  of all  the default cases  and  the  non-default cases. 
-The coefficient  estimates  are now  selected such  that the  likelihood  function  (in  this case  the  probability)  is  maximized.
-While the detail  of  the  optimization  is out  of  the  scope  for  this  class,  any statistical  software  can  do  that. The following table shows  the resulting  coefficients  for  the  Default data  set:  \\
+If we assume that all training data is statistically independent, then the total probability is simply  the product of all the default cases and the non-default cases.
+The coefficient estimates are now selected such that the likelihood function (in this case the probability) is maximized.
+While the detail of the optimization is out of the scope for this class, any statistical software can do  that. The following table shows the resulting coefficients for the Default data set:  \\
 \begin{center}
 	\begin{tabular}{l|r r r r}
 		& Coefficient & Std. Error & Z-Statistics & P-Value \\
@@ -141,66 +120,62 @@ While the detail  of  the  optimization  is out  of  the  scope  for  this  clas
 		\texttt{balance} & 0.0055 & 0.0002 & 24.9 & < 0.0001 \\
 	\end{tabular}
 \end{center}
-The Z-Statistic plays the role of the t-Statistic  and is defined as $\hat{\beta}_1/SE(\hat{\beta}_1)$. 
+The Z-Statistic plays the role of the t-Statistic  and is defined as $\hat{\beta}_1/SE(\hat{\beta}_1)$.
 High absolute values indicate evidence against the null hypothesis $H_0 : \beta_1=0$. \\
 
 \subsubsection{Linear Discriminant Analysis}
 As we have just seen, we need to know the probability of a class, given some observations, to make the optimal class decision.
-In linear discriminant analysis (LDA) we go the other way around,
-we estimate the probability density functions of the observations $X$, given a particular class $Y$, i.e. $p(X|Y)$.
+In linear discriminant analysis (LDA) we go the other way around, we estimate the probability density functions of the observations $X$, given a particular class $Y$, i.e. $p(X|Y)$.
 Then we apply Bayes theorem to flip these probabilities around and get the one on the right, which allow us to make an optimal decision:
 \[ P(Y|X)=\frac{P(X|Y)P(Y)}{P(X)} \]
 
 {\renewcommand{\arraystretch}{1.5}
 	\subsubsection{Using Bayes' theorem for classification}
 	We want to classify observations into K classes. We need to know what the probability of each class is, without having any observation.
-	This is called the prior probability $\pi_k$. We need to know what the pdf's for each the observations, given a particular class k.
+	This is called the prior probability $\pi_k$. We need to know what the pdf's for each of the observations, given a particular class k.
 	This is the likelihood of an observation, given a particular class $f_k(X)=p(X|Y=k)$.
 	\begin{itemize}
 		\item $f_k(x)$ is relatively large, if there is a high probability that an observation in the k\ts{th} class has a value around a small neighborhood of $x$
 		\item $f_k(x)$ is relatively small, if there is a low probability that an observation in the k\ts{th} class has a value around a small neighborhood of $x$
 		\item Note that the integral over the small neighborhood is actually the probability
 	\end{itemize}
-	Bayes' theorem states \[ Pr(Y=k|X=x)=\frac{\pi_kf_k(x)}{\sum_{l=1}^{K}\pi_lf_l(x)}\] 
-	To keep the notation light and consistent with the previous chapters, the following abbreviation is used: 
+	Bayes' theorem states \[ Pr(Y=k|X=x)=\frac{\pi_kf_k(x)}{\sum_{l=1}^{K}\pi_lf_l(x)}\]
+	To keep the notation light and consistent with the previous chapters, the following abbreviation is used:
 	\[ p_k(X)=Pr(Y=k|X)\]
 	Note that this is called the posterior probability that an observation $X$ belongs to class k.
 	Selecting the class which has the largest posterior probability results in the lowest average number of errors. \\
-	Here's a simple example with to classes $A$ and $B$ and continuous observations X: \\
+	Here's a simple example with two classes $A$ and $B$ and continuous observations X: \\
 	\\
 	$P(Y|X)=\frac{P(X|Y)P(Y)}{P(X)}$ where $P(X)=P(X|Y=A)P(Y=A)+P(X|Y=B)P(Y=B)$ hence
-	\[ P(Y=A|X)=\frac{P(X|Y=A)P(Y=A)}{P(X|Y=A)(P(Y=A)+P(X|Y=B)P(Y=B)} \text{ and } \]
-	\[ P(Y=B|X)=\frac{P(X|Y=B)P(Y=B)}{P(X|Y=A)(P(Y=A)+P(X|Y=B)P(Y=B)} \] 
-	pick the class $A$ or $B$ that has a higher probability given the measured data $X$ \\
-	Bayes' theorem suggest, that instead of modeling $p_k(X)$ directly (as is done with logistic regression)
-	one could model/estimate $f_k(x)$ and $\pi_k$ and then use the theorem to find the needed $p_k(X)$
+	\[ P(Y=A|X)=\frac{P(X|Y=A)P(Y=A)}{P(X|Y=A)(P(Y=A)+P(X|Y=B)P(Y=B))} \text{ and } \]
+	\[ P(Y=B|X)=\frac{P(X|Y=B)P(Y=B)}{P(X|Y=A)(P(Y=A)+P(X|Y=B)P(Y=B))} \]
+	pick the class $A$ or $B$ that has a higher probability given the measured data $X$. \\
+	Bayes' theorem suggests, that instead of modeling $p_k(X)$ directly (as is done with logistic regression) one could model/estimate $f_k(x)$ and $\pi_k$ and then use the theorem to find the needed $p_k(X)$
 	\[ Pr(Y=k|X=x)=\frac{\pi_kf_k(x)}{\sum_{l=1}^{K}\pi_lf_l(x)} \]
-	Estimating the prior probabilities $\pi_k$ is easy, simply use the fraction of samples in the training set that belong
-	to class k as the estimate of the prior probabilities. 
+	Estimating the prior probabilities $\pi_k$ is easy, simply use the fraction of samples in the training set that belong to class k as the estimate of the prior probabilities.
 	Without any observations, that is clearly the best possible guess.
-	Estimating $f_k(X)$ is more challenging, except we assume some parametric form. 
+	Estimating $f_k(X)$ is more challenging, except we assume some parametric form.
 	Hence being able to estimate $f_k(X)$ will allow us to use Bayes' theorem to calculate the posterior probabilities
 	for each class and selecting the class with the highest posterior probability will result in the smallest error rate.
 
 
 \subsection{Resampling Methods}
 \subsubsection{Introduction}
-As the name implies, these  are methods  which  use  the  given  training set over and over again. 
-This is  achieved  by  sampling  that  set,  i.e., create  different  subsets.
-To each  of  these  subsets,  the  model can be  fitted  which  allows  for  a statistical  evaluation  of  the  fitting.
-The focus  will  be  on  two fundamental  resampling  methods, Cross-validation and Bootstrap.
+As the name implies, these are methods which use the given training set over and over again.
+This is achieved by sampling that set, i.e., create different subsets.
+To each of these subsets, the model can be fitted which allows for a statistical evaluation of the fitting.
+The focus will be on two fundamental resampling methods, Cross-validation and Bootstrap.
 
 \subsubsection{Cross-Validation}
 Cross-validation can be used to estimate the test error in order to evaluate the performance of a method and finding an optimal flexibility  setting.
-The training error rate is the average error  that results when the training data is  evaluated with the trained model (note  that the model has seen
-all the samples in the training set and hence, this rate must be low for a reasonable  system).
-The test error rate  is the average  error that results when predicting the response to a NEW observation. 
-Since the model has never seen these samples, the test error  rate is the rate we would like to minimize.
+The training error rate is the average error that results when the training data is evaluated with the trained model (note that the model has seen all the samples in the training set and hence, this rate must be low for a reasonable  system).
+The test error rate is the average error that results when predicting the response to a NEW observation.
+Since the model has never seen these samples, the test error rate is the rate we would like to minimize.
 Usually the training error rate is smaller than the test  error rate.
-If the training error  rate is a lot smaller, that implies that the system  is overtrained.
-If  we have a large test data set, then calculating the test error rate  is simple, but that is almost never the case.
-Since no test set is available, the basic  idea  is  to  hold  out  some samples  from  the  training  set  and then  use  these  as  test  set.
-There are different  approaches to do this.
+If the training error rate is a lot smaller, that implies that the system is overtrained.
+If we have a large test data set, then calculating the test error rate is simple, but that is almost never the case.
+Since no test set is available, the basic idea is to hold out some samples from the training set and then use these as test set.
+There are different approaches to do this.
 
 \subsubsection{Cross-Validation: The Validation Set Approach}
 The Validation Set Approach is the most basic approach of cross-validation.
@@ -246,27 +221,27 @@ Hence the residuals for high leverage points are scaled up by exactly the right 
 
 \subsubsection{Bootstrap}
 Most commonly used to provide a measure of accuracy of a parameter estimate and/or of a given statistical learning method and the uncertainty associated with a given estimator.
-Example:  Investing a fixed sum of money into two financial assets with returns of X and Y (both variables are random):
+Example: Investing a fixed sum of money into two financial assets with returns of X and Y (both variables are random):
 \[ Var(\alpha X+(1-\alpha)Y) \qquad \alpha =\frac{\sigma_Y^2-\sigma_{XY}}{\sigma_X^2+\sigma_Y^2-2\sigma_{XY}}\]
 X and Y are correlated and the goal is to minimize the variance (risk proxy) of the overall investment.
-In reality, the variance and the covariance is not known and need to be estimated using a data set that contains past measurements of  X and Y.
-Now we can estimate a value for $\alpha$ that will minimize  the variance of the investment.
+In reality, the variance and the covariance is not known and need to be estimated using a data set that contains past measurements of X and Y.
+Now we can estimate a value for $\alpha$ that will minimize the variance of the investment.
 
 \subsection{Abbreviations}
 {\renewcommand{\arraystretch}{2}
 	\begin{tabular}{l p{5cm} l}
-		\textbf{Abb.} & \textbf{Meaning} & \textbf{Formula}  \\ 
+		\textbf{Abb.} & \textbf{Meaning} & \textbf{Formula}  \\
 		$MSE$ & Mean Squared Error & $ MSE=\frac{1}{n}\mysum (y_i-\hat{f}(x_i)) $ \\
 		$RSS$ & Residual Sum of Squares & $RSS= \mysum (y_i-\hat{y}_i)^2 = e_1^2+e_2^2+...+e_n^2$ \\
 		$TSS$ & Total Sum of Squares & $TSS=\mysum (y_i-\bar{y})^2$ \\
-		$SE$ & Standard Error & 
+		$SE$ & Standard Error &
 		$ SE(\hat{\beta}_0)^2 = \sigma^2 \left[ \frac{1}{n}+\frac{\bar{x}^2}{\sum_{i=1}^{n}(x_i-\bar{x})^2} \right] \qquad SE(\hat{\beta}_1)^2 = \frac{\sigma^2}{\mysum (x_i-\bar{x})^2}$ \\
 		$RSE$ & Residual Standard Error & $RSE=\sqrt{\frac{1}{n-2}RSS}=\sqrt{\frac{1}{n-2}\mysum (y_i-\hat{y}_i)^2}$ \\
 		$R^2$ & R-Statistics & $R^2=\frac{TSS-RSS}{TSS}=1-\frac{RSS}{TSS}$ \\
 		$F$ & F-Statistics & $F=\frac{(TSS-RSS)/p}{RSS/(n-p-1)}$ \\
 		$h_i$ & Leverage Statistics & $h_i=\frac{1}{n}+\frac{(x_i-\bar{x})^2}{\sum_{i'=1}^{n}(x_{i'}-\bar{x})^2}$ \\
 		$VIF$ & Variance Inflation Factor & $VIF(\hat{\beta}_j)=\frac{1}{1-R^2_{X_j|X_{-j}}}$ \\
-		$\ell(\beta_0,\beta_1)$ & Likelihood Function & 
+		$\ell(\beta_0,\beta_1)$ & Likelihood Function &
 		$\ell (\beta_0,\beta_1) = \prod_{i:y_i=1}p(x_i) \prod_{i':y_{i'}=1} (1 - p(x_{i'}))$ \\
 		$f_k(X)$ & PDF for each Observation \newline given particular class k &
 		$f_k(X)=p(X|Y=k)$ \\
@@ -274,19 +249,8 @@ Now we can estimate a value for $\alpha$ that will minimize  the variance of the
 		$p_k(X)$ & Posterior Probability & $p_k(X)=Pr(Y=k|X)$ \\
 		$LDA$ & Linear Discriminant Analysis & $f_k(x)=\frac{1}{\sqrt{2\pi}\sigma_k}\exp \left(-\frac{1}{2\sigma^2_k}(x-\mu_k)^2\right)$ \\
 		$CV_{(k)}$ & k-fold Cross-Validation & $CV_{(k)}= \frac{1}{k} \sum_{i=1}^{k} MSE_i$ \\
-		$LOOCV$ & Leave One Out Cross-Validation & $CV_{(n)}= \frac{1}{n} \sum_{i=1}^{n} MSE_i 
+		$LOOCV$ & Leave One Out Cross-Validation & $CV_{(n)}= \frac{1}{n} \sum_{i=1}^{n} MSE_i
 		=\frac{1}{n} \sum_{i=1}^{n} \left( \frac{y_i - \hat{y}_i}{1-h_i} \right)  $\\
 		$h_i$ & Leverage of sample $i$ & $h_i= \frac{1}{n} $ \\
 		$RR$ & Ridge Regression & $ \mysum \left( y_i-\beta_0 - \sum_{j=1}^{p} \beta_j x_{ij} \right)^2 + \lambda \sum_{j=1}^{p} \beta_j^2 = RSS + \lambda \sum_{j=1}^{p} \beta_j^2$ \\
-		
-		
 	\end{tabular}
-
-
-
-
-
-
-
-
-
