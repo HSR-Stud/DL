@@ -38,7 +38,7 @@
 	\end{align*}
 
 	\subsection{Expectation, Variance and Covariance}
-	The ecpectation $\mu$ of a function $f()$ of a RV $x$ is the weighted average over the distribution $P(x)$:
+	The expectation $\mu$ of a function $f()$ of an RV $x$ is the weighted average over the distribution $P(x)$:
 	\begin{align*}
 	\text{Discrete: }  &\Exp_{x\sim P}\left[f(x)\right] = \sum_x P(x)f(x)\\
 	\text{Continuous: }  &\Exp_{x\sim p}\left[f(x)\right] = \int p(x)f(x)dx
@@ -82,8 +82,8 @@
 	\subsection{Multinoulli Distribution}
 	A distribution over a discrete variable with $k$ different states.
 	The parameter is a vector $\bol{p} \in \left[0,1\right]^{k-1}$ (with $k-1$ elements), where each entry $p_i$ is the probability of state $i$.
-	The finale states probability $p_k$ is given by $1-\bol{1}^T\bol{p}$.
-	Multinoulliis most often used to describe probabilities over a finite number of classes.
+	The final state's probability $p_k$ is given by $1-\bol{1}^T\bol{p}$.
+	Multinoullis are most often used to describe probabilities over a finite number of classes.
 
 	\subsection{Gaussian Distribution}
 	Most commonly used distribution over continuous RVs.
@@ -95,7 +95,7 @@
 	\exp \left( -\frac{1}{2} (\bol{x}-\bol{\mu})^T\bol{\Sigma}^{-1}(\bol{x}-\bol{\mu}) \right) \]
 
 	\begin{itemize}
-		\item For simplicity the covariance matrix is often assumed to be a diagonal matrix, hence all dimensions of $\bol{x}$ are uncorrelated.
+		\item For simplicity, the covariance matrix is often assumed to be a diagonal matrix, hence all dimensions of $\bol{x}$ are uncorrelated.
 		\item An even simpler model is the isotropic Gaussian distribution since the covariance matrix is simply a scalar times the identity matrix. Hence, the dimensions are not only uncorrelated but also all have the same variance.
 	\end{itemize}
 
@@ -126,7 +126,7 @@
 	h'(z)&= 1-\left[h(z)\right]^2
 	\end{align*}
 
-	\textbf{Rectifier Linear Unit (ReLU):}
+	\textbf{Rectified Linear Unit (ReLU):}
 	\begin{align*}
 	h(z) &= \max\left(0,z\right)\\
 	h'(z)&= \begin{cases}
@@ -137,10 +137,10 @@
 
 	\textbf{Softplus Function:}
 	\begin{align*}
-	\zeta(z) &= \log\left(1+\exp(x)\right)\\
+	\zeta(z) &= \log\left(1+\exp(z)\right)\\
 	\zeta'(z)&= \sigma(z)\\
 	-\zeta(-z) &= \log\left(\sigma(z)\right)\\
-	\zeta(z) &= \int_{-\infty}^{x}\sigma(y)dy
+	\zeta(z) &= \int_{-\infty}^{z}\sigma(y)dy
 	\end{align*}
 
 	\subsection{Bayes' Rule}
@@ -189,8 +189,8 @@
 	The entropy $H(P)$ is the minimum average amount of information needed to transmit symbols drawn from $P(.)$ using a code designed for $P(.)$:
 	\[ H(P) = -\sum_{x} \log\left(P(x)\right) \]
 
-	Hence the KL divergence is the difference DKL $(P\lVert Q)=H(P,Q)-H(P)$:
-	\[ -\sum_{x} P(x)\log \left(Q(x)\right) +\sum_{x} \log\left(P(x)\right) \]
+  Hence the KL divergence is the difference $D_{KL}(P\lVert Q)=H(P,Q)-H(P)$:
+  \[ -\sum_{x} P(x)\log \left(Q(x)\right) +\sum_{x} P(x)\log \left(P(x)\right) \]
 
 	The KL divergence is never negative, and zero if and only if $P$ and $Q$ are the same distributions.
 
