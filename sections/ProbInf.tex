@@ -187,7 +187,7 @@
 	\[ H(P,Q) = -\sum_{x} P(x)\log \left(Q(x)\right) \]
 
 	The entropy $H(P)$ is the minimum average amount of information needed to transmit symbols drawn from $P(.)$ using a code designed for $P(.)$:
-	\[ H(P) = -\sum_{x} \log\left(P(x)\right) \]
+	\[ H(P) = -\sum_{x} P(x) \log\left(P(x)\right) \]
 
   Hence the KL divergence is the difference $D_{KL}(P\lVert Q)=H(P,Q)-H(P)$:
   \[ -\sum_{x} P(x)\log \left(Q(x)\right) +\sum_{x} P(x)\log \left(P(x)\right) \]
