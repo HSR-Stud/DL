@@ -1,5 +1,4 @@
-Juerg Rast
-Raphael Nestler
-Philipp Riedel
-Gian Claudio Koeppel
-Hannes Badertscher
+Simon Kassian Locher
+Max Schwendeler
+Michael Schmid
+Noah Kälin
